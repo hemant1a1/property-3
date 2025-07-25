@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PropertyPal</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -147,7 +148,7 @@
       <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12">
         <!-- Text Content -->
         <div class="text-center lg:text-left flex-1 space-y-6 opacity-0 animate-fadeInUp">
-          <h1 class="text-4xl sm:text-4xl lg:text-5xl font-bold !leading-tight text-gray-900">
+          <h1 class="text-4xl sm:text-4xl lg:text-5xl font-bold !leading-tight text-gray-900 font-[Playfair_Display]">
             The Complete<br />
             <span class="bg-gradient-to-r from-gray-900 to-purple-600 text-transparent bg-clip-text">Property</span><br />
             Management Solution
@@ -522,14 +523,17 @@
 </section>
 
 
-  <!-- ========== Creative Apple-Style Footer ========== -->
-  <footer class="bg-[#0f0f0f] text-gray-400 py-16 px-6 sm:px-10">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 text-sm">
+  <footer class="relative bg-[#0f0f0f] text-gray-300 py-24 px-6 sm:px-10 overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0 bg-[url('./city.png')] bg-cover bg-center opacity-20 pointer-events-none"></div>
+
+  <!-- Content Container -->
+  <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 text-sm">
 
     <!-- Brand Intro -->
     <div class="col-span-2">
       <h3 class="text-white text-xl font-semibold mb-4">PropertyPal</h3>
-      <p class="leading-relaxed text-gray-400">
+      <p class="leading-relaxed text-gray-300">
         Experience the future of property management. Effortlessly manage, monitor, and grow your real estate with precision and ease.
       </p>
     </div>
@@ -569,7 +573,7 @@
   </div>
 
   <!-- Bottom Note -->
-  <div class="mt-14 border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+  <div class="relative z-10 mt-14 border-t border-gray-800 pt-6 text-center text-xs text-gray-300">
     © 2025 PropertyPal Inc. All trademarks and brands are the property of their respective owners.
   </div>
 </footer>
