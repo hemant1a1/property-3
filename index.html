@@ -130,242 +130,234 @@
         50%  { transform: scale(0.9); }
         100% { transform: scale(1); }
       }
+
+      .border-gradient-horizontal {
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-image: linear-gradient(to right, transparent, rgb(203 213 225 / 0.8), transparent) 1;
+        -o-border-image: linear-gradient(to right, transparent, rgb(203 213 225 / 0.8), transparent) 1;
+      }
+
+      .border-gradient-horizontal-dark {
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-image: linear-gradient(to right, transparent, rgb(51 65 85/.7),transparent) 1;
+        -o-border-image: linear-gradient(to right, transparent, rgb(51 65 85/.7),transparent) 1;
+      }
     </style>
 
   </head>
   <body class="font-sans antialiased text-gray-900">
 
-    <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 bg-white/45 backdrop-blur-lg border-b border-gray-200 shadow-[0_2px_6px_rgba(0,0,0,0.01)] transition-all duration-300">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex justify-between items-center h-[76px] px-10 lg:px-0">
-          <a href="#" class="text-3xl font-bold tracking-tight text-gray-900 hover:opacity-90 transition">
-            <span class="bg-gradient-to-r from-gray-900 to-purple-600 text-transparent bg-clip-text">PropertyPal</span>
+    <header x-data="{ open: false }" class="max-w-7xl mx-auto rounded-xl fixed top-2 md:top-6 left-0 right-0 w-full z-50 bg-white/85 backdrop-blur-lg border border-gray-200 shadow-[0_2px_6px_rgba(0,0,0,0.01)] transition-all duration-300">
+      <div class="px-4 py-2.5">
+        <div class="flex items-center justify-between relative">
+          <!-- Logo Left -->
+          <a href="#" class="text-xl font-bold tracking-tight text-gray-900 hover:opacity-90 transition">
+            <span class="bg-gradient-to-r from-gray-900 to-indigo-600 text-transparent bg-clip-text">PropertyPal</span>
           </a>
 
-          <!-- Desktop Navigation -->
-          <nav class="hidden md:flex items-center space-x-10 text-[15.5px] text-gray-800 font-medium">
-            <a href="#home" class="relative hover:text-blue-600 transition group">
+          <!-- Desktop Navigation Centered -->
+          <nav class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-10 text-sm text-gray-800 font-medium">
+            <a href="#" class="relative hover:text-blue-600 transition group">
               Home
               <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
             </a>
-            <a href="#demo" class="relative hover:text-blue-600 transition group">
+            <a href="#" class="relative hover:text-blue-600 transition group">
               Demo
               <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
             </a>
-            <a href="#features" class="relative hover:text-blue-600 transition group">
+            <a href="#" class="relative hover:text-blue-600 transition group">
               Features
               <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
             </a>
-            <a href="#about" class="relative hover:text-blue-600 transition group">
+            <a href="#" class="relative hover:text-blue-600 transition group">
               About Us
               <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
             </a>
-            <a href="#contact" class="ml-2 inline-block bg-black text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-md hover:bg-gray-900 transition-all duration-300">Contact Us</a>
           </nav>
 
-          <!-- Hamburger Button -->
-          <div class="md:hidden">
+          <!-- Contact Button Right -->
+          <div class="hidden md:flex">
+            <a href="#" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-150 ease-in-out px-3 py-[5px] shadow text-gray-200 bg-gray-800">Contact Us</a>
+          </div>
+
+          <!-- Hamburger Button (Mobile) -->
+          <div class="md:hidden ml-auto">
             <button @click="open = true" class="p-2 bg-white shadow rounded-xl">
               <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
             </button>
           </div>
         </div>
       </div>
-
     </header>
 
-    <!-- Hero Section -->
-    <div class="relative z-10 h-[100vh] bg-gradient-to-r from-[#f5f6ff] to-indigo-100 overflow-hidden pt-40 pb-24 px-4 sm:px-8">
-      <!-- Blurred Backgrounds -->
-      <div class="absolute top-[13px] right-[87px] w-[558px] h-[537px] bg-[#a8baffcc] rounded-[342px] blur-[250px] -z-10 pointer-events-none"></div>
-      <div class="absolute top-0 left-[40px] w-[558px] h-[537px] bg-[#c88fff7a] rounded-[342px] blur-[250px] -z-10 pointer-events-none"></div>
-      <div class="absolute top-[110px] right-0 w-[430px] lg:w-[545px] xl:w-[666px] -z-10 pointer-events-none flex justify-end">
-        <img src="https://cdn.prod.website-files.com/6872b63c13c4bcf06175aefa/6872b63c13c4bcf06175af6e_Graph%20(2).png" alt="Graph" class="w-full object-contain opacity-50" />
-      </div>
 
-      <!-- Hero Content -->
-      <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12">
-        <!-- Text Content -->
-        <div class="text-center lg:text-left flex-1 space-y-6 opacity-0 animate-fadeInUp">
-          <h1 class="text-4xl sm:text-4xl lg:text-5xl font-semibold !leading-tight text-gray-900">
-            The Complete<br />
-            <span class="font-bold">Property</span><br />
-            Management Solution
-          </h1>
-          <p class="text-gray-600 text-lg sm:text-xl max-w-xl mx-auto lg:mx-0">
-            Streamline your rental business with automated rent collection, maintenance tracking, tenant management, and powerful analytics.
-          </p>
-          <div>
-            <a href="#About" class="inline-block bg-black text-white text-sm sm:text-base font-medium px-6 py-3 rounded-full hover:bg-gray-800 transition-all shadow-md">
+    <section class="relative overflow-hidden">
+
+    <!-- Stripes Illustration -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 z-[-10] pointer-events-none">
+      <img src="./stripes.svg" width="768" height="432" alt="Stripes" class="max-w-none">
+    </div>
+
+    <!-- Blurred Circles -->
+    <div
+      class="pointer-events-none absolute left-1/2 ml-[380px] top-[420px] -translate-x-1/2 transform"
+      aria-hidden="true"
+    >
+      <div
+        class="will-change-[filter] blur-[160px] opacity-50 bg-gradient-to-tr from-blue-500 to-transparent rounded-full w-80 h-80"
+      ></div>
+    </div>
+
+    <div
+      class="pointer-events-none absolute bottom-[18%] left-[40%] -translate-x-1/2 ml-[-300px]"
+      aria-hidden="true"
+    >
+      <div
+        class="w-80 h-80 rounded-full opacity-50 blur-[160px] will-change-[filter] bg-gradient-to-tr from-blue-500 to-transparent"
+      ></div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-20">
+
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div class="mb-6" data-aos="zoom-y-out" data-aos-delay="100">
+          <span class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium tracking-wider text-indigo-700 uppercase bg-indigo-100 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+              <path d="M5 3v4"></path>
+              <path d="M19 17v4"></path>
+              <path d="M3 5h4"></path>
+              <path d="M17 19h4"></path>
+            </svg>
+            Trusted by 1,000+ property managers
+          </span>
+        </div>
+
+
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-semibold !leading-tight text-gray-900 mb-6 border-gradient-horizontal" data-aos="zoom-y-out" data-aos-delay="150">
+          Your AI-Powered Partner For <br class="hidden sm:block"> Smarter Property Management
+        </h1>
+        <p class="text-base text-gray-600 max-w-3xl mx-auto mb-6" data-aos="zoom-y-out" data-aos-delay="300">
+          Say goodbye to manual tasks and scattered communication. PropertyPal helps you automate rent collection, streamline maintenance requests, manage tenants efficiently, and gain real-time insights — all in one powerful platform
+        </p>
+        <div class="relative border-gradient-horizontal">
+          <div class="relative mx-auto sm:flex sm:justify-center aos-init aos-animate" data-aos="zoom-y-out" data-aos-delay="450">
+            <a
+              href="#0"
+              class="relative inline-flex items-center justify-center text-sm text-white bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-bottom px-4 py-2 rounded-lg shadow transition hover:bg-blue-700"
+            >
+              Start Free Trial <span class="ml-2">→</span>
+            </a>
+            <a
+              href="#0"
+              class="text-sm mt-4 sm:mt-0 sm:ml-4 text-gray-800 bg-white px-4 py-2 rounded-lg shadow transition hover:bg-gray-100 inline-flex items-center gap-2"
+            >
+              <i data-lucide="play" class="w-4 h-4"></i>
               Watch Demo
             </a>
           </div>
         </div>
 
-        <!-- Image Content -->
-        <div class="flex-1 relative w-full max-w-lg hidden md:grid grid-cols-1 md:grid-cols-[1fr_1.25fr] gap-5">
+      </div>
 
-           <!-- LEFT COLUMN -->
-          <div class="grid gap-3 h-full animate-fade">
+      <!-- Hero Terminal Output -->
+      <div class="flex justify-center py-3 px-4 sm:px-6 lg:px-8 border-gradient-horizontal" data-aos="zoom-y-out" data-aos-delay="600">
+        <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-5xl text-left">
 
-            <!-- Profile Card -->
-            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg border border-white/30 p-4 text-center text-sm hover:shadow-xl transition-all duration-500 animate-slide-in delay-100">
-              <div class="relative w-14 h-14 mx-auto mb-3">
-                <!-- Pulsing Ring -->
-                <span class="pulse-ring"></span>
+          <div class="flex flex-col sm:flex-row gap-8 items-center">
+            <!-- 🏘️ Image -->
+            <img src="./d1.png" alt="Smart Property Dashboard" class="w-full sm:w-1/2 rounded-xl" />
 
-                <!-- Avatar -->
-                <img src="https://i.pravatar.cc/100?img=12"
-                    alt="Avatar"
-                    class="relative z-10 w-14 h-14 rounded-full border shadow-md transition-all duration-500 hover:scale-105" />
-              </div>
-              <h2 class="font-semibold text-gray-900 text-sm leading-snug">Ahmed Khalil</h2>
-              <p class="text-xs text-gray-500">New York, USA</p>
-              <div class="flex justify-around mt-3 text-xs text-gray-600 animate-fade delay-200">
-                <div class="text-center">
-                  <p class="font-semibold text-indigo-600">45</p>
-                  <span class="text-[11px]">Projects</span>
-                </div>
-                <div class="text-center">
-                  <p class="font-semibold text-indigo-600">5.7k</p>
-                  <span class="text-[11px]">Followers</span>
-                </div>
-                <div class="text-center">
-                  <p class="font-semibold text-indigo-600">65</p>
-                  <span class="text-[11px]">Following</span>
-                </div>
-              </div>
-            </div>
+            <!-- 📝 Compelling Content -->
+            <div class="text-gray-700 text-sm space-y-3">
+              <p>
+                Say goodbye to spreadsheets and scattered notes. Our intuitive dashboard helps you manage <span class="font-medium text-indigo-600">rentals, tenants, payments, and maintenance</span> in one place — from anywhere.
+              </p>
 
-            <!-- Transfers Card -->
-            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg border border-white/30 p-4 text-sm hover:shadow-xl transition-all duration-500 animate-slide-in delay-200 flex-1">
-              <h3 class="font-semibold text-sm text-gray-900 mb-3">Recent Transfers</h3>
-              <ul class="space-y-3">
-                <li class="flex justify-between items-center animate-fade delay-[300ms]">
-                  <div class="flex items-center space-x-3">
-                    <img src="https://i.pravatar.cc/40?img=1" class="w-8 h-8 rounded-full shadow-sm" />
-                    <div>
-                      <p class="text-sm font-medium text-gray-800">From Chris</p>
-                      <span class="text-xs text-gray-400">Today, 16:36</span>
-                    </div>
-                  </div>
-                  <span class="text-green-500 font-semibold text-sm">+ $50</span>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-2">
+                  <span class="text-green-500 text-lg">✔</span>
+                  <span><strong>Automated Rent Collection</strong> with reminders and digital payments.</span>
                 </li>
-                <li class="flex justify-between items-center animate-fade delay-[400ms]">
-                  <div class="flex items-center space-x-3">
-                    <img src="https://i.pravatar.cc/40?img=2" class="w-8 h-8 rounded-full shadow-sm" />
-                    <div>
-                      <p class="text-sm font-medium text-gray-800">To Antony</p>
-                      <span class="text-xs text-gray-400">Today, 08:49</span>
-                    </div>
-                  </div>
-                  <span class="text-red-400 font-semibold text-sm">- $27</span>
+                <li class="flex items-start gap-2">
+                  <span class="text-green-500 text-lg">✔</span>
+                  <span><strong>Smart Maintenance Logs</strong> to track, assign, and resolve issues quickly.</span>
                 </li>
-                <li class="flex justify-between items-center animate-fade delay-[500ms]">
-                  <div class="flex items-center space-x-3">
-                    <img src="https://i.pravatar.cc/40?img=3" class="w-8 h-8 rounded-full shadow-sm" />
-                    <div>
-                      <p class="text-sm font-medium text-gray-800">From Joy</p>
-                      <span class="text-xs text-gray-400">Yesterday</span>
-                    </div>
-                  </div>
-                  <span class="text-green-500 font-semibold text-sm">+ $157</span>
+                <li class="flex items-start gap-2">
+                  <span class="text-green-500 text-lg">✔</span>
+                  <span><strong>Tenant & Lease Management</strong> with digital documentation.</span>
                 </li>
               </ul>
+
+              <p class="text-gray-800">
+                Trusted by property managers, landlords, and real estate pros — boost efficiency and never miss a task again.
+              </p>
             </div>
           </div>
-
-          <!-- RIGHT COLUMN -->
-          <div class="grid gap-3 grid-rows-[auto_1fr] h-full animate-fade delay-[200ms] mt-10 ">
-
-            <!-- Earnings Card -->
-            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg border border-white/30 p-4 text-sm flex items-start gap-3 hover:shadow-xl transition-all duration-500 animate-slide-in delay-[300ms]">
-              <div class="bg-[#6366F1]/20 text-[#6366F1] rounded-full p-2">
-                <i data-lucide="check-circle" class="w-5 h-5"></i>
-              </div>
-              <div class="text-sm space-y-1">
-                <p class="font-semibold">Safe Investment</p>
-                <p class="text-xs opacity-75">Located in a high-demand growth area with solid ROI.</p>
-              </div>
-            </div>
-
-            <!-- Monthly Earnings with Graph -->
-            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg border border-white/30 p-4 flex flex-col text-sm hover:shadow-xl transition-all duration-500 animate-slide-in delay-[400ms]">
-              <div class="flex justify-between items-center mb-3">
-                <div>
-                  <div class="text-xs text-gray-500">This Month Earnings</div>
-                  <div class="text-xl font-bold text-indigo-600 leading-tight animate-fade delay-[500ms]">$682.5</div>
-                </div>
-                <div class="text-green-600 text-[11px] font-medium bg-green-100/80 px-2 py-[2px] rounded-full animate-fade delay-[600ms]">
-                  +2.45%
-                </div>
-              </div>
-              <div class="flex-1 min-h-[70px] bg-gradient-to-r from-indigo-50/70 to-indigo-100/80 rounded-lg relative overflow-hidden animate-fade delay-[700ms]">
-                <svg viewBox="0 0 100 30" class="absolute inset-0 w-full h-full">
-                  <polyline
-                    fill="none"
-                    stroke="#6366F1"
-                    stroke-width="2"
-                    points="0,25 10,15 20,20 30,10 40,15 50,5 60,10 70,18 80,12 90,20 100,15"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          
         </div>
-
       </div>
-    </div>
 
-    <section
-      id="About"
-      class="bg-[#f5f6ff]/10 border border-white/30 backdrop-blur-md rounded-3xl shadow-[0_5px_40px_rgb(165_171_181_/_24%)] p-10 md:p-16 max-w-7xl mx-auto my-16"
-    >
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <!-- Left Content -->
-        <div>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm mb-4">
-            Discover a Simpler<br />Way to Live Every Day
+
+
+    </div>
+    </section>
+
+    
+
+    <section id="why-choose" class="relative pt-0 pb-16  px-6">
+      <div class="max-w-6xl mx-auto">
+        <!-- Heading -->
+        <div class="text-center mb-16">
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm">
+            Why You Should Choose PropertyPal
           </h2>
-          <p class="text-gray-700 text-lg leading-relaxed mb-6">
-            Experience seamless digital workflows designed to save time, reduce friction, and elevate your experience.
-            Watch our demo to see how we empower modern users.
+          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Be among the forward-thinking property managers to modernize your operations with a platform built for efficiency, transparency, and growth.
           </p>
-          <a href="#features" class="inline-block bg-black text-white text-sm sm:text-base font-medium px-6 py-3 rounded-full hover:bg-gray-800 transition-all shadow-md">
-            Explore Features
-          </a>
         </div>
 
-        <!-- Right: Video Thumbnail with Play Button -->
-        <div 
-          class="relative group rounded-2xl overflow-hidden shadow-sm ring-1 ring-white/10"
-          onmousemove="followCursor(event)" 
-          onmouseleave="resetCursor()"
-          id="video-container"
-        >
-          <!-- Background Image -->
-          <img 
-            src="./system.webp" 
-            alt="Video Thumbnail" 
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
-          />
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Card -->
+          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+              <i data-lucide="settings" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Automated Management</h3>
+            <p class="text-gray-600">Automate rent reminders, maintenance, and lease tracking in one place.</p>
+          </div>
 
-          <!-- Dark Overlay on Hover -->
-          <div class="absolute inset-0 bg-[#1828646b] opacity-50 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+          <!-- Card -->
+          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Secure & Reliable</h3>
+            <p class="text-gray-600">Protected with encryption and cloud-based reliability.</p>
+          </div>
 
-          <!-- Play Button (Cursor Follower) -->
-          <div 
-            id="play-button"
-            class="absolute top-1/2 left-1/2 w-20 h-20 bg-white/80 z-20 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transform -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-200"
-          >
-            <svg class="w-10 h-10 text-indigo-600" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M10 16.5l6-4.5-6-4.5v9z"/>
-            </svg>
+          <!-- Card -->
+          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+              <i data-lucide="smartphone" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Anytime Access</h3>
+            <p class="text-gray-600">Manage your properties anytime, anywhere.</p>
+          </div>
+
+          <!-- Card -->
+          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+              <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Smart Reporting</h3>
+            <p class="text-gray-600">Track payments and expenses for easy, tax-ready reporting.</p>
           </div>
         </div>
-
 
       </div>
     </section>
@@ -373,13 +365,13 @@
     <section class="py-10 ">
       <!-- 🔵 PAGE TITLE -->
       <div class="mb-8 text-center px-6">
-        <h2 class="max-w-7xl mx-auto text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm">
+        <h2 class="max-w-6xl mx-auto text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm">
           Your Smart Property Dashboard
         </h2>
       </div>
 
       <!-- 🔵 TABS -->
-      <div class="flex justify-center mb-10 text-lg font-semibold border-b border-gray-200 ">
+      <div class="flex justify-center mb-10 text-base font-medium border-b border-gray-200 ">
         <div id="tabs" class="flex gap-6 overflow-x-auto whitespace-nowrap pb-1 px-6">
           <button data-tab="overview" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all after:duration-300 active">Rental Overview</button>
           <button data-tab="payment" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all after:duration-300">Payment</button>
@@ -389,7 +381,7 @@
       </div>
 
       <!-- 🔵 TAB CONTENTS -->
-      <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-6xl mx-auto px-6">
         <!-- Overview -->
         <div id="overview" class="tab-content block">
           <div class="grid grid-cols-1 md:grid-cols-[56%_44%] gap-10 items-start">
@@ -499,67 +491,72 @@
       </div>
     </section>
 
-
-
-
-    <section id="why-choose" class="relative py-16  px-6">
-      <div class="max-w-7xl mx-auto">
+    <section class="py-12 bg-[#f4f5f6] text-center">
+      <div class="max-w-6xl mx-auto px-4">
         <!-- Heading -->
-        <div class="text-center mb-16">
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm">
-            Why You Should Choose PropertyPal
-          </h2>
-          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            Be among the forward-thinking property managers to modernize your operations with a platform built for efficiency, transparency, and growth.
-          </p>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm mb-4">
+          Discover a Simpler <br /> Way to Live Every Day
+        </h2>
+        
+        <!-- Subheading -->
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+          Experience seamless digital workflows designed to save time, reduce friction, and elevate your experience. Watch our demo to see how we empower modern users.
+        </p>
+
+        <!-- Row: Button + OR + Video -->
+        <div class="flex flex-col justify-center items-center gap-6">
+          <!-- Button -->
+          <a href="#features" class="inline-block rounded-md text-sm font-medium transition-all duration-150 ease-in-out px-3 py-[5px] shadow text-gray-200 bg-gray-800">
+            Explore Features
+          </a>
+
+          <!-- OR -->
+          <span class="text-gray-500 text-sm uppercase">or</span>
+
+          <!-- Video -->
+          <div class="max-w-2xl mx-auto">
+ <div class="rounded-2xl bg-white p-6 text-center text-gray-800 font-semibold text-xl
+    shadow-[0px_2px_0px_#e0e0e0,0px_6px_0px_#cfcfcf,0px_10px_15px_rgba(0,0,0,0.1)] transition-all duration-300">
+   
+
+    <div 
+      class="relative group rounded-2xl overflow-hidden"
+      onmousemove="followCursor(event)" 
+      onmouseleave="resetCursor()"
+      id="video-container"
+    >
+      <!-- Background Image -->
+      <img 
+        src="./d2.png" 
+        alt="Video Thumbnail" 
+        class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105" 
+      />
+
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-[#021d4140] opacity-50 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+
+      <!-- Play Button -->
+      <div
+        id="play-button"
+        class="absolute top-1/2 left-1/2 w-20 h-20 bg-white/80 z-20 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transform -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-200"
+      >
+        <svg class="w-10 h-10 text-indigo-600" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 16.5l6-4.5-6-4.5v9z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
         </div>
-
-        <!-- Features Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Card -->
-          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
-              <i data-lucide="settings" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Automated Management</h3>
-            <p class="text-gray-600">Automate rent reminders, maintenance, and lease tracking in one place.</p>
-          </div>
-
-          <!-- Card -->
-          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
-              <i data-lucide="shield-check" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Secure & Reliable</h3>
-            <p class="text-gray-600">Protected with encryption and cloud-based reliability.</p>
-          </div>
-
-          <!-- Card -->
-          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
-              <i data-lucide="smartphone" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Anytime Access</h3>
-            <p class="text-gray-600">Manage your properties anytime, anywhere.</p>
-          </div>
-
-          <!-- Card -->
-          <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
-              <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Smart Reporting</h3>
-            <p class="text-gray-600">Track payments and expenses for easy, tax-ready reporting.</p>
-          </div>
-        </div>
-
       </div>
     </section>
 
 
-
-    <section id="PropertyPal-features" class="relative py-16 px-6">
-      <div class="max-w-7xl mx-auto">
+    <section id="PropertyPal-features" class="relative py-12 px-4">
+      <div class="max-w-6xl mx-auto">
         <!-- Heading -->
         <div class="text-center mb-16">
           <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm">
@@ -637,8 +634,8 @@
     </section>
 
 
-   <section id="contact" class="py-20 px-6">
-      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+   <section id="contact" class="py-12 px-4">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
         
         <!-- Left: Contact Info -->
         <div class="space-y-8">
@@ -718,7 +715,7 @@
 
             <!-- Submit -->
             <button type="submit"
-              class="w-full bg-black hover:bg-black text-white py-3 rounded-xl font-semibold transition">
+              class="w-full bg-gray-900 hover:bg-gray-900 text-white py-3 rounded-xl font-semibold transition">
               Send Message
             </button>
           </form>
@@ -726,62 +723,127 @@
       </div>
     </section>
 
+    <section class="py-12 px-4">
+      <div class="max-w-6xl mx-auto text-center shadow-2xl text-center rounded-xl overflow-hidden px-4 py-10 relative before:content-[''] before:absolute before:inset-0 before:bg-gray-900 before:rounded-xl before:z-[-10] before:pointer-events-none">
+        
+        <div
+          aria-hidden="true"
+          class="absolute left-1/2 top-0 -translate-x-1/2 z-[-10] pointer-events-none"
+        >
+          <img
+            src="./stripes-dark.svg"
+            width="768"
+            height="432"
+            alt="Stripes"
+            class="max-w-none"
+          />
+        </div>
 
+        <!-- 🔵 Heading & Subheading -->
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold !leading-tight text-white border-gradient-horizontal-dark">
+          Ready to Simplify Property Management?
+        </h2>
+        <p class="mt-4 mb-6 text-md text-gray-300 max-w-3xl mx-auto">
+          Join thousands of successful property managers who have streamlined their operations with PropertyFlow. Start your free trial today.
+        </p>
 
-  <footer class="relative bg-[#0f0f0f] text-gray-300 py-24 px-6 sm:px-10 overflow-hidden">
-  <!-- Background Image -->
-  <div class="absolute inset-0 bg-[url('./city.png')] bg-cover bg-center opacity-20 pointer-events-none"></div>
+        <!-- 🟢 Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <a href="#0" class="relative inline-flex items-center justify-center text-sm text-white bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-bottom px-4 py-2 rounded-lg shadow transition hover:bg-blue-700">
+              Start Free Trial <span class="ml-2">→</span>
+          </a>
+        </div>
 
-  <!-- Content Container -->
-  <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 text-sm">
-
-    <!-- Brand Intro -->
-    <div class="col-span-2">
-      <h3 class="text-white text-xl font-semibold mb-4">PropertyPal</h3>
-      <p class="leading-relaxed text-gray-300">
-        Experience the future of property management. Effortlessly manage, monitor, and grow your real estate with precision and ease.
-      </p>
-    </div>
-
-    <!-- Explore -->
-    <div>
-      <h4 class="text-white font-medium mb-4">Explore</h4>
-      <ul class="space-y-2">
-        <li><a href="#solutions" class="hover:text-white transition">Solutions</a></li>
-        <li><a href="#pricing" class="hover:text-white transition">Pricing</a></li>
-        <li><a href="#partners" class="hover:text-white transition">Partners</a></li>
-      </ul>
-    </div>
-
-    <!-- Support -->
-    <div>
-      <h4 class="text-white font-medium mb-4">Support</h4>
-      <ul class="space-y-2">
-        <li><a href="#faq" class="hover:text-white transition">FAQs</a></li>
-        <li><a href="#help" class="hover:text-white transition">Help Center</a></li>
-        <li><a href="#docs" class="hover:text-white transition">Developer Docs</a></li>
-      </ul>
-    </div>
-
-    <!-- Contact & Social -->
-    <div>
-      <h4 class="text-white font-medium mb-4">Get in Touch</h4>
-      <p class="mb-2">support@propertypal.io</p>
-      <p class="mb-4">+91 90234 56789</p>
-      <div class="flex space-x-4 text-lg">
-        <a href="#" class="hover:text-white transition"><i class="fab fa-x-twitter"></i></a>
-        <a href="#" class="hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
       </div>
-    </div>
+    </section>
 
-  </div>
 
-  <!-- Bottom Note -->
-  <div class="relative z-10 mt-14 border-t border-gray-800 pt-6 text-center text-xs text-gray-300">
-    © 2025 PropertyPal Inc. All trademarks and brands are the property of their respective owners.
-  </div>
-</footer>
+    <footer class="bg-[#f4f5f6] text-gray-600 border-t border-gray-200 py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Top Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 text-sm">
+          
+          <!-- Logo + Desc -->
+          <div class="md:col-span-2">
+            <a href="#" class="block text-2xl font-bold tracking-tight text-gray-900 hover:opacity-90 transition mb-4">
+              <span class="bg-gradient-to-r from-gray-900 to-indigo-600 text-transparent bg-clip-text">PropertyFlow</span>
+            </a>
+            <p class="text-gray-500 max-w-md leading-relaxed mb-6">
+              The complete property management solution trusted by thousands of landlords and property managers worldwide.
+            </p>
+
+            <!-- Social Links -->
+            <ul class="flex space-x-4">
+              <li class="">
+                  <a class="bg-[#0f1012] text-white rounded-lg w-10 h-10 flex items-center justify-center" href="https://www.facebook.com/" target="_blank">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 50 50" class="w-4 h-4 text-white">
+                          <path d="M40.43,21.739h-7.645v-5.014c0-1.883,1.248-2.322,2.127-2.322c0.877,0,5.395,0,5.395,0V6.125l-7.43-0.029  c-8.248,0-10.125,6.174-10.125,10.125v5.518h-4.77v8.53h4.77c0,10.947,0,24.137,0,24.137h10.033c0,0,0-13.32,0-24.137h6.77  L40.43,21.739z"></path>
+                      </svg>
+                  </a>
+              </li>
+              <li class="">
+                  <a class="bg-[#0f1012]  text-white rounded-lg w-10 h-10 flex items-center justify-center" href="https://www.instagram.com/india/" target="_blank">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 448 512" class="w-4 h-4 text-white">
+                          <path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+                      </svg>
+                  </a>
+              </li>
+              <li class="">
+                  <a class="bg-[#0f1012]  text-white rounded-lg w-10 h-10 flex items-center justify-center" href="https://www.linkedin.com/company//" target="_blank">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 448 512" class="w-4 h-4 text-white">
+                          <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path>
+                      </svg>
+                  </a>
+              </li>
+              <li class="">
+                  <a class="bg-[#0f1012]  text-white rounded-lg w-10 h-10 flex items-center justify-center" href="https://www.youtube.com/@" target="_blank">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 22" class="w-4 h-4 text-white">
+                          <path d="M 12 4 C 12 4 5.7455469 3.9999687 4.1855469 4.4179688 C 3.3245469 4.6479688 2.6479687 5.3255469 2.4179688 6.1855469 C 1.9999687 7.7455469 2 12 2 12 C 2 12 1.9999687 16.254453 2.4179688 17.814453 C 2.6479687 18.675453 3.3255469 19.352031 4.1855469 19.582031 C 5.7455469 20.000031 12 20 12 20 C 12 20 18.254453 20.000031 19.814453 19.582031 C 20.674453 19.352031 21.352031 18.674453 21.582031 17.814453 C 22.000031 16.254453 22 12 22 12 C 22 12 22.000031 7.7455469 21.582031 6.1855469 C 21.352031 5.3255469 20.674453 4.6479688 19.814453 4.4179688 C 18.254453 3.9999687 12 4 12 4 z M 12 6 C 14.882 6 18.490875 6.1336094 19.296875 6.3496094 C 19.465875 6.3946094 19.604391 6.533125 19.650391 6.703125 C 19.891391 7.601125 20 10.342 20 12 C 20 13.658 19.891391 16.397875 19.650391 17.296875 C 19.605391 17.465875 19.466875 17.604391 19.296875 17.650391 C 18.491875 17.866391 14.882 18 12 18 C 9.119 18 5.510125 17.866391 4.703125 17.650391 C 4.534125 17.605391 4.3956094 17.466875 4.3496094 17.296875 C 4.1086094 16.398875 4 13.658 4 12 C 4 10.342 4.1086094 7.6011719 4.3496094 6.7011719 C 4.3946094 6.5331719 4.533125 6.3946094 4.703125 6.3496094 C 5.508125 6.1336094 9.118 6 12 6 z M 10 8.5351562 L 10 15.464844 L 16 12 L 10 8.5351562 z"></path>
+                      </svg>
+                  </a>
+              </li>
+            </ul>
+
+
+          </div>
+
+          <!-- Product Links -->
+          <div>
+            <h3 class="text-gray-900 font-semibold mb-4">Product</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-gray-800 transition">Features</a></li>
+              <li><a href="#" class="hover:text-gray-800 transition">Pricing</a></li>
+              <li><a href="#" class="hover:text-gray-800 transition">Security</a></li>
+              <li><a href="#" class="hover:text-gray-800 transition">Integrations</a></li>
+            </ul>
+          </div>
+
+          <!-- Support Links -->
+          <div>
+            <h3 class="text-gray-900 font-semibold mb-4">Support</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-gray-800 transition">Help Center</a></li>
+              <li><a href="#" class="hover:text-gray-800 transition">Contact Us</a></li>
+              <li><a href="#" class="hover:text-gray-800 transition">API Docs</a></li>
+              <li><a href="#" class="hover:text-gray-800 transition">System Status</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="mt-12 border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+          <p>© 2024 PropertyFlow. All rights reserved.</p>
+          <div class="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" class="hover:text-gray-800 transition">Privacy Policy</a>
+            <a href="#" class="hover:text-gray-800 transition">Terms of Service</a>
+            <a href="#" class="hover:text-gray-800 transition">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
 
 
 
@@ -789,71 +851,71 @@
       lucide.createIcons();
     </script>
     <script>
-  const playBtn = document.getElementById("play-button");
-  const container = document.getElementById("video-container");
+      const playBtn = document.getElementById("play-button");
+      const container = document.getElementById("video-container");
 
-  let mouseX = 0;
-  let mouseY = 0;
-  let currentX = 0;
-  let currentY = 0;
-  let isInside = false;
+      let mouseX = 0;
+      let mouseY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let isInside = false;
 
-  container.addEventListener("mousemove", (e) => {
-    const rect = container.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
-    isInside = true;
-  });
-
-  container.addEventListener("mouseleave", () => {
-    isInside = false;
-  });
-
-  function animate() {
-    const speed = 0.2;
-    if (isInside) {
-      currentX += (mouseX - currentX) * speed;
-      currentY += (mouseY - currentY) * speed;
-    } else {
-      currentX += ((container.clientWidth / 2) - currentX) * speed;
-      currentY += ((container.clientHeight / 2) - currentY) * speed;
-    }
-
-    playBtn.style.left = `${currentX}px`;
-    playBtn.style.top = `${currentY}px`;
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-</script>
-
-
-
-<script>
-  // Tab switch with smooth transition
-  const tabButtons = document.querySelectorAll(".tab-button");
-  const tabContents = document.querySelectorAll(".tab-content");
-
-  tabButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const target = button.getAttribute("data-tab");
-
-      tabButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      tabContents.forEach((content) => {
-        if (content.id === target) {
-          content.classList.remove("hidden");
-          content.classList.add("fade-in");
-        } else {
-          content.classList.add("hidden");
-          content.classList.remove("fade-in");
-        }
+      container.addEventListener("mousemove", (e) => {
+        const rect = container.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        isInside = true;
       });
-    });
-  });
-</script>
+
+      container.addEventListener("mouseleave", () => {
+        isInside = false;
+      });
+
+      function animate() {
+        const speed = 0.2;
+        if (isInside) {
+          currentX += (mouseX - currentX) * speed;
+          currentY += (mouseY - currentY) * speed;
+        } else {
+          currentX += ((container.clientWidth / 2) - currentX) * speed;
+          currentY += ((container.clientHeight / 2) - currentY) * speed;
+        }
+
+        playBtn.style.left = `${currentX}px`;
+        playBtn.style.top = `${currentY}px`;
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+
+
+
+    <script>
+      // Tab switch with smooth transition
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = button.getAttribute("data-tab");
+
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          tabContents.forEach((content) => {
+            if (content.id === target) {
+              content.classList.remove("hidden");
+              content.classList.add("fade-in");
+            } else {
+              content.classList.add("hidden");
+              content.classList.remove("fade-in");
+            }
+          });
+        });
+      });
+    </script>
 
   </body>
 </html>
