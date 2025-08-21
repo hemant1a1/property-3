@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+   <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+  />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -43,6 +48,43 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+      @keyframes wobbleGlow {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0px);
+    filter: drop-shadow(0 0 0px rgba(59, 130, 246, 0.3));
+  }
+  15% {
+    transform: rotate(2deg) translateY(-3px);
+    filter: drop-shadow(0 12px 18px rgba(59, 130, 246, 0.4));
+  }
+  30% {
+    transform: rotate(-2deg) translateY(2px);
+    filter: drop-shadow(0 14px 20px rgba(59, 130, 246, 0.5));
+  }
+  50% {
+    transform: rotate(1deg) translateY(-4px);
+    filter: drop-shadow(0 16px 24px rgba(59, 130, 246, 0.6));
+  }
+  70% {
+    transform: rotate(-1deg) translateY(3px);
+    filter: drop-shadow(0 14px 20px rgba(59, 130, 246, 0.5));
+  }
+  85% {
+    transform: rotate(2deg) translateY(-2px);
+    filter: drop-shadow(0 12px 18px rgba(59, 130, 246, 0.4));
+  }
+}
+
+.animate-wobble-glow {
+  animation: wobbleGlow 5s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+.animate-[float_6s_ease-in-out_infinite] { animation: float 6s ease-in-out infinite; }
+.animate-[float_8s_ease-in-out_infinite] { animation: float 8s ease-in-out infinite; }
 
       .tab-button.active::after {
     width: 100%; /* or 100% for full width */
@@ -149,166 +191,226 @@
   </head>
   <body class="font-sans antialiased text-gray-900">
 
-    <header x-data="{ open: false }" class="max-w-7xl mx-auto rounded-xl fixed top-2 md:top-6 left-0 right-0 w-full z-50 bg-white/85 backdrop-blur-lg border border-gray-200 shadow-[0_2px_6px_rgba(0,0,0,0.01)] transition-all duration-300">
-      <div class="px-4 py-2.5">
-        <div class="flex items-center justify-between relative">
+    <header x-data="{ open: false, scrolled: false }"
+        x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
+        :class="scrolled ? 'py-3 shadow-lg bg-white/95 backdrop-blur-lg' : 'py-4 bg-white/95 backdrop-blur-lg'"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="px-4 md:px-8 flex items-center justify-between">
+          
           <!-- Logo Left -->
-          <a href="#" class="text-xl font-bold tracking-tight text-gray-900 hover:opacity-90 transition">
-            <span class="bg-gradient-to-r from-gray-900 to-indigo-600 text-transparent bg-clip-text">PropertyPal</span>
+          <a href="#" class="flex items-center space-x-2 font-bold tracking-tight transition-all duration-300"
+            :class="scrolled ? 'text-xl' : 'text-2xl'">
+            <span class="bg-gradient-to-r from-gray-900 to-blue-600 text-transparent bg-clip-text">PropertyPal</span>
           </a>
 
-          <!-- Desktop Navigation Centered -->
-          <nav class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-10 text-sm text-gray-800 font-medium">
-            <a href="#" class="relative hover:text-blue-600 transition group">
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex space-x-12 text-gray-800 font-medium text-sm transition-all duration-300"
+              :class="scrolled ? 'text-sm' : 'text-base'">
+            <a href="#" class="relative group">
               Home
-              <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
+              <span class="absolute left-0 -bottom-1 w-0 h-1 bg-blue-600 transition-all group-hover:w-full"></span>
             </a>
-            <a href="#" class="relative hover:text-blue-600 transition group">
+            <a href="#" class="relative group">
               Demo
-              <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
+              <span class="absolute left-0 -bottom-1 w-0 h-1 bg-blue-600 transition-all group-hover:w-full"></span>
             </a>
-            <a href="#" class="relative hover:text-blue-600 transition group">
+            <a href="#" class="relative group">
               Features
-              <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
+              <span class="absolute left-0 -bottom-1 w-0 h-1 bg-blue-600 transition-all group-hover:w-full"></span>
             </a>
-            <a href="#" class="relative hover:text-blue-600 transition group">
+            <a href="#" class="relative group">
               About Us
-              <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full duration-300"></span>
+              <span class="absolute left-0 -bottom-1 w-0 h-1 bg-blue-600 transition-all group-hover:w-full"></span>
             </a>
           </nav>
 
-          <!-- Contact Button Right -->
-          <div class="hidden md:flex">
-            <a href="#" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-150 ease-in-out px-3 py-[5px] shadow text-gray-200 bg-gray-800">Contact Us</a>
+          <!-- Contact Button -->
+          <div class="hidden md:flex transition-all duration-300">
+            <a href="#" class="inline-flex items-center justify-center whitespace-nowrap px-3 py-[5px] text-sm rounded-md font-medium transition-all duration-150 ease-in-out shadow text-gray-200 bg-gray-800">Contact Us</a>
           </div>
 
-          <!-- Hamburger Button (Mobile) -->
-          <div class="md:hidden ml-auto">
-            <button @click="open = true" class="p-2 bg-white shadow rounded-xl">
+          <!-- Mobile Hamburger -->
+          <div class="md:hidden">
+            <button @click="open = true" class="p-2 bg-white shadow rounded-lg">
               <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
             </button>
           </div>
         </div>
-      </div>
-    </header>
+
+        <!-- Mobile Menu -->
+        <div x-show="open" @click.away="open = false" x-transition class="md:hidden bg-white shadow-lg absolute top-full left-0 w-full">
+          <nav class="flex flex-col p-4 space-y-3">
+            <a href="#" class="hover:text-blue-600 transition">Home</a>
+            <a href="#" class="hover:text-blue-600 transition">Demo</a>
+            <a href="#" class="hover:text-blue-600 transition">Features</a>
+            <a href="#" class="hover:text-blue-600 transition">About Us</a>
+            <a href="#" class="px-4 py-2 rounded-lg bg-gray-800 text-white text-sm font-medium shadow hover:opacity-90 transition">Contact Us</a>
+          </nav>
+        </div>
+      </header>
+
+
+
 
 
     <section class="relative overflow-hidden">
 
-    <!-- Stripes Illustration -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 z-[-10] pointer-events-none">
-      <img src="./stripes.svg" width="768" height="432" alt="Stripes" class="max-w-none">
-    </div>
-
-    <!-- Blurred Circles -->
-    <div
-      class="pointer-events-none absolute left-1/2 ml-[380px] top-[420px] -translate-x-1/2 transform"
-      aria-hidden="true"
-    >
-      <div
-        class="will-change-[filter] blur-[160px] opacity-50 bg-gradient-to-tr from-blue-500 to-transparent rounded-full w-80 h-80"
-      ></div>
-    </div>
-
-    <div
-      class="pointer-events-none absolute bottom-[18%] left-[40%] -translate-x-1/2 ml-[-300px]"
-      aria-hidden="true"
-    >
-      <div
-        class="w-80 h-80 rounded-full opacity-50 blur-[160px] will-change-[filter] bg-gradient-to-tr from-blue-500 to-transparent"
-      ></div>
-    </div>
-
-    <!-- Content Container -->
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-20">
-
-      <!-- Section Header -->
-      <div class="text-center mb-12">
-        <div class="mb-6" data-aos="zoom-y-out" data-aos-delay="100">
-          <span class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium tracking-wider text-indigo-700 uppercase bg-indigo-100 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
-              <path d="M5 3v4"></path>
-              <path d="M19 17v4"></path>
-              <path d="M3 5h4"></path>
-              <path d="M17 19h4"></path>
-            </svg>
-            Trusted by 1,000+ property managers
-          </span>
-        </div>
-
-
-        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-semibold !leading-tight text-gray-900 mb-6 border-gradient-horizontal" data-aos="zoom-y-out" data-aos-delay="150">
-          Your AI-Powered Partner For <br class="hidden sm:block"> Smarter Property Management
-        </h1>
-        <p class="text-base text-gray-600 max-w-3xl mx-auto mb-6" data-aos="zoom-y-out" data-aos-delay="300">
-          Say goodbye to manual tasks and scattered communication. PropertyPal helps you automate rent collection, streamline maintenance requests, manage tenants efficiently, and gain real-time insights — all in one powerful platform
-        </p>
-        <div class="relative border-gradient-horizontal">
-          <div class="relative mx-auto sm:flex sm:justify-center aos-init aos-animate" data-aos="zoom-y-out" data-aos-delay="450">
-            <a
-              href="#0"
-              class="relative inline-flex items-center justify-center text-sm text-white bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-bottom px-4 py-2 rounded-lg shadow transition hover:bg-blue-700"
-            >
-              Start Free Trial <span class="ml-2">→</span>
-            </a>
-            <a
-              href="#0"
-              class="text-sm mt-4 sm:mt-0 sm:ml-4 text-gray-800 bg-white px-4 py-2 rounded-lg shadow transition hover:bg-gray-100 inline-flex items-center gap-2"
-            >
-              <i data-lucide="play" class="w-4 h-4"></i>
-              Watch Demo
-            </a>
-          </div>
-        </div>
-
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute inset-0 [background:linear-gradient(0deg,theme(colors.blue.100)_2%,transparent_100%)]"></div>
       </div>
 
-      <!-- Hero Terminal Output -->
-      <div class="flex justify-center py-3 px-4 sm:px-6 lg:px-8 border-gradient-horizontal" data-aos="zoom-y-out" data-aos-delay="600">
-        <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-5xl text-left">
+      <!-- Stripes Illustration -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 z-[-10] pointer-events-none">
+        <img src="./stripes.svg" width="768" height="432" alt="Stripes" class="max-w-none">
+      </div>
 
-          <div class="flex flex-col sm:flex-row gap-8 items-center">
-            <!-- 🏘️ Image -->
-            <img src="./d1.png" alt="Smart Property Dashboard" class="w-full sm:w-1/2 rounded-xl" />
+      <!-- Blurred Circles -->
+      <div
+        class="pointer-events-none absolute left-1/2 ml-[380px] top-[420px] -translate-x-1/2 transform"
+        aria-hidden="true"
+      >
+        <div
+          class="will-change-[filter] blur-[160px] opacity-50 bg-gradient-to-tr from-blue-500 to-transparent rounded-full w-80 h-80"
+        ></div>
+      </div>
 
-            <!-- 📝 Compelling Content -->
-            <div class="text-gray-700 text-sm space-y-3">
-              <p>
-                Say goodbye to spreadsheets and scattered notes. Our intuitive dashboard helps you manage <span class="font-medium text-indigo-600">rentals, tenants, payments, and maintenance</span> in one place — from anywhere.
-              </p>
+      <div
+        class="pointer-events-none absolute bottom-[18%] left-[40%] -translate-x-1/2 ml-[-300px]"
+        aria-hidden="true"
+      >
+        <div
+          class="w-80 h-80 rounded-full opacity-50 blur-[160px] will-change-[filter] bg-gradient-to-tr from-blue-500 to-transparent"
+        ></div>
+      </div>
 
-              <ul class="space-y-2">
-                <li class="flex items-start gap-2">
-                  <span class="text-green-500 text-lg">✔</span>
-                  <span><strong>Automated Rent Collection</strong> with reminders and digital payments.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-green-500 text-lg">✔</span>
-                  <span><strong>Smart Maintenance Logs</strong> to track, assign, and resolve issues quickly.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-green-500 text-lg">✔</span>
-                  <span><strong>Tenant & Lease Management</strong> with digital documentation.</span>
-                </li>
-              </ul>
+      <!-- Content Container -->
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-30 md:pb-6">
 
-              <p class="text-gray-800">
-                Trusted by property managers, landlords, and real estate pros — boost efficiency and never miss a task again.
-              </p>
+        <!-- Section Header -->
+        <div class="text-center mb-6">
+          <div class="mb-6" data-aos="zoom-y-out" data-aos-delay="100">
+            <span class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium tracking-wider text-blue-700 uppercase bg-blue-100 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                <path d="M5 3v4"></path>
+                <path d="M19 17v4"></path>
+                <path d="M3 5h4"></path>
+                <path d="M17 19h4"></path>
+              </svg>
+              Trusted by 1,000+ property managers
+            </span>
+          </div>
+
+
+          <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold !leading-tight text-gray-900 mb-6 border-gradient-horizontal" data-aos="zoom-y-out" data-aos-delay="150">
+            Property Management Simplified.
+          </h1>
+          <p class="text-base text-gray-600 max-w-3xl mx-auto mb-6" data-aos="zoom-y-out" data-aos-delay="300">
+            Effortless rent collection, maintenance tracking, tenant management, analytics and much more. All in one seamless, powerful platform.
+          </p>
+          <div class="relative border-gradient-horizontal">
+            <div class="relative mx-auto sm:flex sm:justify-center aos-init aos-animate" data-aos="zoom-y-out" data-aos-delay="450">
+              <a
+                href="#0"
+                class="relative inline-flex items-center justify-center text-sm text-white bg-gradient-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-bottom px-4 py-2 rounded-lg shadow transition hover:bg-blue-700"
+              >
+                Start Free Trial <span class="ml-2">→</span>
+              </a>
+              <a
+                href="#0"
+                class="text-sm mt-4 sm:mt-0 sm:ml-4 text-gray-800 bg-white px-4 py-2 rounded-lg shadow transition hover:bg-gray-100 inline-flex items-center gap-2"
+              >
+                <i data-lucide="play" class="w-4 h-4"></i>
+                Watch Demo
+              </a>
             </div>
           </div>
+
+        </div>
+
+        <!-- Hero Terminal Output -->
+       <div class="flex justify-center py-6 px-6 lg:px-8 [perspective:1000px]">
+        <div
+          x-data="{ p: 0 }"
+          x-init="window.addEventListener('scroll', () => { p = Math.min(window.scrollY/300, 1) })"
+          :style="`transform: rotateX(${10 - 10*p}deg) translateZ(${ -15 + 15*p }px);`"
+          class="shadow-md rounded-lg will-change-transform"
+        >
+          <img src="./d1.png" class="w-full rounded-lg" alt="">
         </div>
       </div>
 
+      </div>
+    </section>
 
+    <section class="py-12  bg-[#f4f5f6]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12">Property Management Features</h2>
 
-    </div>
+        <div class="swiper mySwiper relative overflow-hidden">
+          <div class="swiper-wrapper mb-16">
+            <div class="swiper-slide p-4 flex justify-center">
+              <div class="bg-white border border-gray-200/50 shadow-md rounded-lg p-6 text-center transition-transform duration-500 flex flex-col justify-between min-h-[180px]">
+                <h3 class="font-bold text-lg mb-2">Property Management</h3>
+                <p>Manage multiple properties with ease. Track occupancy, rent collection, and property performance from one dashboard.</p>
+              </div>
+            </div>
+            <div class="swiper-slide p-4 flex justify-center">
+              <div class="bg-white border border-gray-200/50 shadow-md rounded-lg p-6 text-center transition-transform duration-500 flex flex-col justify-between min-h-[180px]">
+                <h3 class="font-bold text-lg mb-2">Rent Collection</h3>
+                <p>Automated rent collection with multiple payment methods. Set up recurring payments and send reminders automatically.</p>
+              </div>
+            </div>
+            <div class="swiper-slide p-4 flex justify-center">
+              <div class="bg-white border border-gray-200/50 shadow-md rounded-lg p-6 text-center transition-transform duration-500 flex flex-col justify-between min-h-[180px]">
+                <h3 class="font-bold text-lg mb-2">Maintenance Tracking</h3>
+                <p>Streamline maintenance requests from submission to completion. Assign vendors and track progress in real-time.</p>
+              </div>
+            </div>
+            <div class="swiper-slide p-4 flex justify-center">
+              <div class="bg-white border border-gray-200/50 shadow-md rounded-lg p-6 text-center transition-transform duration-500 flex flex-col justify-between min-h-[180px]">
+                <h3 class="font-bold text-lg mb-2">Tenant Management</h3>
+                <p>Comprehensive tenant profiles with lease information, communication history, and document storage.</p>
+              </div>
+            </div>
+            <div class="swiper-slide p-4 flex justify-center">
+              <div class="bg-white border border-gray-200/50 shadow-md rounded-lg p-6 text-center transition-transform duration-500 flex flex-col justify-between min-h-[180px]">
+                <h3 class="font-bold text-lg mb-2">Analytics & Reports</h3>
+                <p>Detailed insights into property performance, financial reports, and occupancy trends to make informed decisions.</p>
+              </div>
+            </div>
+            <div class="swiper-slide p-4 flex justify-center">
+              <div class="bg-white border border-gray-200/50 shadow-md rounded-lg p-6 text-center transition-transform duration-500 flex flex-col justify-between min-h-[180px]">
+                <h3 class="font-bold text-lg mb-2">Communication Hub</h3>
+                <p>Built-in messaging system for landlord-tenant communication. Community features for tenant engagement.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="absolute bottom-0 left-1/2 flex -translate-x-1/2 space-x-8">
+            <!-- Prev -->
+            <div class="c-swiper-button-prev w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg cursor-pointer transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+              </svg>
+            </div>
+
+            <!-- Next -->
+            <div class="c-swiper-button-next w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg cursor-pointer transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </section>
 
     
 
-    <section id="why-choose" class="relative pt-0 pb-16  px-6">
+    <section id="why-choose" class="relative py-12  px-6">
       <div class="max-w-6xl mx-auto">
         <!-- Heading -->
         <div class="text-center mb-16">
@@ -324,7 +426,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <!-- Card -->
           <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4 transition-all group-hover:scale-110">
               <i data-lucide="settings" class="w-6 h-6"></i>
             </div>
             <h3 class="text-lg font-bold text-gray-900 mb-2">Automated Management</h3>
@@ -333,7 +435,7 @@
 
           <!-- Card -->
           <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4 transition-all group-hover:scale-110">
               <i data-lucide="shield-check" class="w-6 h-6"></i>
             </div>
             <h3 class="text-lg font-bold text-gray-900 mb-2">Secure & Reliable</h3>
@@ -342,7 +444,7 @@
 
           <!-- Card -->
           <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4 transition-all group-hover:scale-110">
               <i data-lucide="smartphone" class="w-6 h-6"></i>
             </div>
             <h3 class="text-lg font-bold text-gray-900 mb-2">Anytime Access</h3>
@@ -351,7 +453,7 @@
 
           <!-- Card -->
           <div class="group relative backdrop-blur-md rounded-3xl p-6 border border-[#B7B9BE] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_9pt_#091e4226,0_0_1px_#091e424f]">
-            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4 transition-all group-hover:scale-110">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4 transition-all group-hover:scale-110">
               <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
             </div>
             <h3 class="text-lg font-bold text-gray-900 mb-2">Smart Reporting</h3>
@@ -373,10 +475,10 @@
       <!-- 🔵 TABS -->
       <div class="flex justify-center mb-10 text-base font-medium border-b border-gray-200 ">
         <div id="tabs" class="flex gap-6 overflow-x-auto whitespace-nowrap pb-1 px-6">
-          <button data-tab="overview" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all after:duration-300 active">Rental Overview</button>
-          <button data-tab="payment" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all after:duration-300">Payment</button>
-          <button data-tab="communication" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all after:duration-300">Communication</button>
-          <button data-tab="maintenance" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all after:duration-300">Maintenance</button>
+          <button data-tab="overview" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 active">Rental Overview</button>
+          <button data-tab="payment" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300">Payment</button>
+          <button data-tab="communication" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300">Communication</button>
+          <button data-tab="maintenance" class="tab-button relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300">Maintenance</button>
         </div>
       </div>
 
@@ -402,7 +504,7 @@
                 Track all your rental properties, tenant activities, and payment status from a single control panel.
               </p>
               <div class="bg-white border border-gray-200 rounded-2xl p-6">
-                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4">
+                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4">
                   <i data-lucide="layout-dashboard" class="w-6 h-6"></i>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">Centralized Dashboard</h3>
@@ -428,7 +530,7 @@
               <h2 class="text-2xl font-bold mb-4">Automated Payment Tracking</h2>
               <p class="text-gray-600 mb-5">Never miss a rent due date again with smart notifications and payment logs.</p>
               <div class="bg-white border border-gray-200 rounded-2xl p-6">
-                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4">
+                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4">
                   <i data-lucide="credit-card" class="w-6 h-6"></i>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">Smart Rent Reminders</h3>
@@ -454,7 +556,7 @@
               <h2 class="text-2xl font-bold mb-4">Tenant Communication</h2>
               <p class="text-gray-600 mb-5">Keep your tenants informed with built-in messaging tools for support and updates.</p>
               <div class="bg-white border border-gray-200 rounded-2xl p-6">
-                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4">
+                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4">
                   <i data-lucide="message-square" class="w-6 h-6"></i>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">In-App Messaging</h3>
@@ -479,7 +581,7 @@
               <h2 class="text-2xl font-bold mb-4">Maintenance Requests</h2>
               <p class="text-gray-600 mb-5">Let tenants raise issues and track service requests efficiently.</p>
               <div class="bg-white border border-gray-200 rounded-2xl p-6">
-                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 mb-4">
+                <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 mb-4">
                   <i data-lucide="wrench" class="w-6 h-6"></i>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">Service Management</h3>
@@ -540,7 +642,7 @@
         id="play-button"
         class="absolute top-1/2 left-1/2 w-20 h-20 bg-white/80 z-20 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transform -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-200"
       >
-        <svg class="w-10 h-10 text-indigo-600" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
           <path d="M10 16.5l6-4.5-6-4.5v9z"/>
         </svg>
       </div>
@@ -572,7 +674,7 @@
           <!-- Feature Item -->
           <div class="flex items-start gap-6 group">
             <div class="flex-shrink-0 w-16 h-16 bg-white/70 border border-gray-200 backdrop-blur-lg rounded-xl flex items-center justify-center shadow transition-all group-hover:scale-105">
-              <i data-lucide="home" class="w-7 h-7 text-indigo-600"></i>
+              <i data-lucide="home" class="w-7 h-7 text-blue-600"></i>
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-900">Property Management</h3>
@@ -582,7 +684,7 @@
 
           <div class="flex items-start gap-6 group">
             <div class="flex-shrink-0 w-16 h-16 bg-white/70 border border-gray-200 backdrop-blur-lg rounded-xl flex items-center justify-center shadow transition-all group-hover:scale-105">
-              <i data-lucide="wallet" class="w-7 h-7 text-indigo-600"></i>
+              <i data-lucide="wallet" class="w-7 h-7 text-blue-600"></i>
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-900">Rent Collection</h3>
@@ -592,7 +694,7 @@
 
           <div class="flex items-start gap-6 group">
             <div class="flex-shrink-0 w-16 h-16 bg-white/70 border border-gray-200 backdrop-blur-lg rounded-xl flex items-center justify-center shadow transition-all group-hover:scale-105">
-              <i data-lucide="wrench" class="w-7 h-7 text-indigo-600"></i>
+              <i data-lucide="wrench" class="w-7 h-7 text-blue-600"></i>
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-900">Maintenance Tracking</h3>
@@ -602,7 +704,7 @@
 
           <div class="flex items-start gap-6 group">
             <div class="flex-shrink-0 w-16 h-16 bg-white/70 border border-gray-200 backdrop-blur-lg rounded-xl flex items-center justify-center shadow transition-all group-hover:scale-105">
-              <i data-lucide="users" class="w-7 h-7 text-indigo-600"></i>
+              <i data-lucide="users" class="w-7 h-7 text-blue-600"></i>
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-900">Tenant Management</h3>
@@ -612,7 +714,7 @@
 
           <div class="flex items-start gap-6 group">
             <div class="flex-shrink-0 w-16 h-16 bg-white/70 border border-gray-200 backdrop-blur-lg rounded-xl flex items-center justify-center shadow transition-all group-hover:scale-105">
-              <i data-lucide="bar-chart-3" class="w-7 h-7 text-indigo-600"></i>
+              <i data-lucide="bar-chart-3" class="w-7 h-7 text-blue-600"></i>
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-900">Analytics & Reports</h3>
@@ -622,7 +724,7 @@
 
           <div class="flex items-start gap-6 group">
             <div class="flex-shrink-0 w-16 h-16 bg-white/70 border border-gray-200 backdrop-blur-lg rounded-xl flex items-center justify-center shadow transition-all group-hover:scale-105">
-              <i data-lucide="message-circle" class="w-7 h-7 text-indigo-600"></i>
+              <i data-lucide="message-circle" class="w-7 h-7 text-blue-600"></i>
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-900">Communication Hub</h3>
@@ -637,44 +739,15 @@
    <section id="contact" class="py-12 px-4">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
         
-        <!-- Left: Contact Info -->
-        <div class="space-y-8">
-          <!-- Title -->
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold !leading-tight text-gray-900 drop-shadow-sm mb-10">
-            India’s most trusted <br />
-            <span class="font-black">Property Management System</span>
-          </h2>
+        <div class="relative w-full h-[500px]">
+          <img src="./contact.webp" alt="Contact" class="w-full h-full object-contain relative z-10 animate-wobble-glow" />
+          
+          <!-- Floating Blue Blob -->
+          <div class="absolute top-10 left-10 w-24 h-24 bg-blue-300/30 rounded-full animate-[float_6s_ease-in-out_infinite]"></div>
 
-          <!-- Stats -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <!-- Stat 1 -->
-            <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 hover:shadow-md transition duration-300">
-              <p class="text-sm font-medium text-gray-500 mb-2 flex items-center gap-2 uppercase tracking-wide">
-                <i data-lucide="check-circle" class="w-4 h-4 text-indigo-500"></i>
-                Verified Listings
-              </p>
-              <p class="text-6xl font-bold text-gray-900">5,000+</p>
-            </div>
-
-            <!-- Stat 2 -->
-            <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-6 hover:shadow-md transition duration-300">
-              <p class="text-sm font-medium text-gray-500 mb-2 flex items-center gap-2 uppercase tracking-wide">
-                <i data-lucide="smile" class="w-4 h-4 text-indigo-500"></i>
-                Tenant Satisfaction
-              </p>
-              <p class="text-6xl font-bold text-gray-900">99.9%</p>
-            </div>
-          </div>
-
-          <!-- Description -->
-          <p class="mt-10 text-gray-500 max-w-2xl mx-auto">
-            Trusted by property owners and tenants across India. Smart tools, faster communication, and verified data — all in one place.
-          </p>
+          <!-- Floating Indigo Blob -->
+          <div class="absolute bottom-10 right-5 w-32 h-32 bg-indigo-300/20 rounded-full animate-[float_8s_ease-in-out_infinite]"></div>
         </div>
-
-
-
-
         <!-- Right: Form (unchanged) -->
         <div class="bg-white/60 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-gray-200">
           <h2 class="text-3xl font-bold text-gray-900 mb-2">Let's talk</h2>
@@ -687,7 +760,7 @@
             <div>
               <label class="block text-sm text-gray-700 mb-1">Your Name</label>
               <div class="flex items-center gap-3 bg-white rounded-lg border border-gray-300 px-3">
-                <i data-lucide="user" class="w-5 h-5 text-indigo-500"></i>
+                <i data-lucide="user" class="w-5 h-5 text-blue-500"></i>
                 <input type="text" placeholder="Enter your name"
                   class="w-full p-3 outline-none bg-transparent placeholder:text-gray-400" />
               </div>
@@ -697,7 +770,7 @@
             <div>
               <label class="block text-sm text-gray-700 mb-1">Your Email</label>
               <div class="flex items-center gap-3 bg-white rounded-lg border border-gray-300 px-3">
-                <i data-lucide="mail" class="w-5 h-5 text-indigo-500"></i>
+                <i data-lucide="mail" class="w-5 h-5 text-blue-500"></i>
                 <input type="email" placeholder="Enter your email"
                   class="w-full p-3 outline-none bg-transparent placeholder:text-gray-400" />
               </div>
@@ -707,7 +780,7 @@
             <div>
               <label class="block text-sm text-gray-700 mb-1">Your Message</label>
               <div class="flex gap-3 bg-white rounded-lg border border-gray-300 px-3">
-                <i data-lucide="message-circle" class="w-5 h-5 text-indigo-500 mt-3"></i>
+                <i data-lucide="message-circle" class="w-5 h-5 text-blue-500 mt-3"></i>
                 <textarea placeholder="Write your message" rows="4"
                   class="w-full p-3 outline-none bg-transparent resize-none placeholder:text-gray-400"></textarea>
               </div>
@@ -723,8 +796,8 @@
       </div>
     </section>
 
-    <section class="py-12 px-4">
-      <div class="max-w-6xl mx-auto text-center shadow-2xl text-center rounded-xl overflow-hidden px-4 py-10 relative before:content-[''] before:absolute before:inset-0 before:bg-gray-900 before:rounded-xl before:z-[-10] before:pointer-events-none">
+    <section class="">
+      <div class="text-center shadow-2xl text-center overflow-hidden px-4 py-10 relative before:content-[''] before:absolute before:inset-0 before:bg-gray-900 before:z-[-10] before:pointer-events-none">
         
         <div
           aria-hidden="true"
@@ -749,7 +822,7 @@
 
         <!-- 🟢 Buttons -->
         <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <a href="#0" class="relative inline-flex items-center justify-center text-sm text-white bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-bottom px-4 py-2 rounded-lg shadow transition hover:bg-blue-700">
+          <a href="#0" class="relative inline-flex items-center justify-center text-sm text-white bg-gradient-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-bottom px-4 py-2 rounded-lg shadow transition hover:bg-blue-700">
               Start Free Trial <span class="ml-2">→</span>
           </a>
         </div>
@@ -758,23 +831,23 @@
     </section>
 
 
-    <footer class="bg-[#f4f5f6] text-gray-600 border-t border-gray-200 py-16">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+    <footer class="bg-[#f4f5f6] text-gray-600 border-t border-gray-200 pt-16 pb-4">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
         <!-- Top Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 text-sm">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-10 text-sm justify-items-center">
           
           <!-- Logo + Desc -->
           <div class="md:col-span-2">
             <a href="#" class="block text-2xl font-bold tracking-tight text-gray-900 hover:opacity-90 transition mb-4">
-              <span class="bg-gradient-to-r from-gray-900 to-indigo-600 text-transparent bg-clip-text">PropertyPal</span>
+              <span class="bg-gradient-to-r from-gray-900 to-blue-600 text-transparent bg-clip-text">PropertyPal</span>
             </a>
             <p class="text-gray-500 max-w-md leading-relaxed mb-6">
               The complete property management solution trusted by thousands of landlords and property managers worldwide.
             </p>
 
             <!-- Social Links -->
-            <ul class="flex space-x-4">
+            <ul class="flex justify-center space-x-4">
               <li class="">
                   <a class="bg-[#0f1012] text-white rounded-lg w-10 h-10 flex items-center justify-center" href="https://www.facebook.com/" target="_blank">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 50 50" class="w-4 h-4 text-white">
@@ -808,42 +881,67 @@
 
           </div>
 
-          <!-- Product Links -->
-          <div>
-            <h3 class="text-gray-900 font-semibold mb-4">Product</h3>
-            <ul class="space-y-2">
-              <li><a href="#" class="hover:text-gray-800 transition">Features</a></li>
-              <li><a href="#" class="hover:text-gray-800 transition">Pricing</a></li>
-              <li><a href="#" class="hover:text-gray-800 transition">Security</a></li>
-              <li><a href="#" class="hover:text-gray-800 transition">Integrations</a></li>
-            </ul>
-          </div>
-
-          <!-- Support Links -->
-          <div>
-            <h3 class="text-gray-900 font-semibold mb-4">Support</h3>
-            <ul class="space-y-2">
-              <li><a href="#" class="hover:text-gray-800 transition">Help Center</a></li>
-              <li><a href="#" class="hover:text-gray-800 transition">Contact Us</a></li>
-              <li><a href="#" class="hover:text-gray-800 transition">API Docs</a></li>
-              <li><a href="#" class="hover:text-gray-800 transition">System Status</a></li>
-            </ul>
-          </div>
         </div>
 
         <!-- Footer Bottom -->
-        <div class="mt-12 border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <div class="mt-8 border-t border-gray-200 pt-4 text-center text-sm text-gray-500">
           <p>© 2024 PropertyPal. All rights reserved.</p>
-          <div class="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" class="hover:text-gray-800 transition">Privacy Policy</a>
-            <a href="#" class="hover:text-gray-800 transition">Terms of Service</a>
-            <a href="#" class="hover:text-gray-800 transition">Cookie Policy</a>
-          </div>
         </div>
       </div>
     </footer>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 2.43,
+      loop: true,
+      spaceBetween: -100,
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        slideShadows: false,
+      },
+      navigation: {
+        nextEl: ".c-swiper-button-next",
+        prevEl: ".c-swiper-button-prev",
+      },
+      breakpoints: {
+        640: { slidesPerView: 1, spaceBetween: 10 },
+        768: { slidesPerView: 1, spaceBetween: 10 },
+        1024: { slidesPerView: 2.43, spaceBetween: -80 },
+      },
+      on: {
+        init: function () {
+          document.querySelectorAll(".swiper-slide div").forEach((slide) => slide.classList.add("scale-90"));
+          setTimeout(() => {
+            const active = document.querySelector(".swiper-slide-active div");
+            if (active) active.classList.remove("scale-90"), active.classList.add("scale-125");
+          }, 50);
+        },
+        slideChangeTransitionStart: function () {
+          document.querySelectorAll(".swiper-slide").forEach((slide) => {
+            slide.querySelector("div").classList.remove("scale-125");
+            slide.querySelector("div").classList.add("scale-90");
+          });
+        },
+        slideChangeTransitionEnd: function () {
+          const centerSlide = document.querySelector(".swiper-slide-active div");
+          centerSlide.classList.remove("scale-90");
+          centerSlide.classList.add("scale-125");
+        },
+      },
+    });
+
+    // Initial scale
+    document.querySelectorAll(".swiper-slide div").forEach((slide) => slide.classList.add("scale-100"));
+    document.querySelector(".swiper-slide-active div").classList.add("scale-125");
+  </script>
 
 
 
