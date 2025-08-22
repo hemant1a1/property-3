@@ -319,7 +319,7 @@
       </div>
     </section>
 
-     <section class="relative py-16 bg-gray-50">
+     <section class="relative py-12 bg-gray-50">
   <!-- Background Image (overall section) -->
   <div class="absolute inset-0 overflow-hidden">
     <img 
@@ -327,10 +327,11 @@
       alt="Background" 
       class="w-full h-full object-cover opacity-10"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-blue-100/60 via-blue-100/70 to-blue-200/80"></div>
+    <!-- <div class="absolute inset-0 bg-gradient-to-b from-blue-100/60 via-blue-100/70 to-blue-200/80"></div> -->
+     <div id="dynamic-gradient" class="absolute inset-0 transition-all duration-700"></div>
   </div>
 
-  <div class="relative max-w-5xl mx-auto px-4">
+  <div class="relative max-w-6xl mx-auto px-4">
     <h2 class="text-4xl md:text-5xl font-semibold text-center text-gray-900">Property Management Features</h2>
 
     <div class="swiper mySwiper relative overflow-hidden">
@@ -685,7 +686,7 @@
 
         <!-- Footer Bottom -->
         <div class="mt-8 border-t border-gray-200/10 pt-4 text-center text-sm text-gray-200">
-          <p>© 2024 PropertyPal. All rights reserved.</p>
+          <p>© 2025 PropertyPal. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -693,6 +694,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
+
+  const gradients = [
+    "bg-gradient-to-b from-blue-100/60 via-blue-100/70 to-blue-200/80", // Slide 1
+    "bg-gradient-to-b from-purple-100/60 via-purple-100/70 to-purple-200/80", // Slide 2
+    "bg-gradient-to-b from-green-100/60 via-green-100/70 to-green-200/80",   // Slide 3
+    "bg-gradient-to-b from-pink-100/60 via-pink-100/70 to-pink-200/80",     // Slide 4
+    "bg-gradient-to-b from-indigo-100/60 via-indigo-100/70 to-indigo-200/80", // Slide 5
+    "bg-gradient-to-b from-yellow-100/60 via-yellow-100/70 to-yellow-200/80", // Slide 6
+  ];
+
+  const gradientDiv = document.getElementById("dynamic-gradient");
+
    const swiper = new Swiper(".mySwiper", {
   effect: "coverflow",
   grabCursor: true,
@@ -703,6 +716,15 @@
   coverflowEffect: { rotate: -1, stretch: 0, depth: 200, modifier: 1, slideShadows: false },
   navigation: { nextEl: ".c-swiper-button-next", prevEl: ".c-swiper-button-prev" },
   breakpoints: { 640: { slidesPerView: 1 }, 768: { slidesPerView: 1 }, 1024: { slidesPerView: 2.43 } },
+  on: {
+      init: function () {
+        gradientDiv.className = "absolute inset-0 transition-all duration-700 " + gradients[0];
+      },
+      slideChange: function () {
+        const index = this.realIndex % gradients.length;
+        gradientDiv.className = "absolute inset-0 transition-all duration-700 " + gradients[index];
+      },
+    },
  
 });
 
