@@ -308,7 +308,7 @@
 
 
 
-    <section class="relative overflow-hidden">
+    <section class="relative overflow-hidden" x-data="{ scroll: 0, showVideo: false, videoSrc: '' }">
 
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute inset-0 [background:linear-gradient(0deg,theme(colors.blue.300)_5%,transparent_100%)]"></div>
@@ -381,7 +381,9 @@
               x-transition:leave-start="opacity-100"
               x-transition:leave-end="opacity-0"
             >
-              <div class="w-16 h-16 bg-black/80 rounded-full flex items-center justify-center hover:bg-black/90 transition-colors cursor-pointer">
+              <div 
+                @click="videoSrc='https://www.youtube.com/embed/l9ELn60OQKk?autoplay=1'; showVideo=true"
+                class="w-16 h-16 bg-black/80 rounded-full flex items-center justify-center hover:bg-black/90 transition-colors cursor-pointer">
                 <i data-lucide="play" class="w-8 h-8 text-white"></i>
               </div>
             </div>
@@ -390,6 +392,37 @@
 
 
       </div>
+
+      <!-- Fullscreen YouTube Modal -->
+      <div 
+        x-show="showVideo" 
+        x-transition.opacity 
+        class="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+        @click.self="showVideo=false; videoSrc='';"
+      >
+        <div class="relative w-full max-w-4xl aspect-video">
+          <!-- Close Button -->
+          <button 
+            @click="showVideo=false; videoSrc='';" 
+            class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300"
+          >
+            &times;
+          </button>
+
+          <!-- YouTube Embed -->
+          <template x-if="videoSrc">
+            <iframe 
+              class="w-full h-full rounded-lg shadow-lg"
+              :src="videoSrc" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="autoplay; encrypted-media" 
+              allowfullscreen
+            ></iframe>
+          </template>
+        </div>
+      </div>
+
     </section>
 
      <section class="relative py-12 [background:linear-gradient(180deg,theme(colors.blue.300)_5%,transparent_100%)]">
@@ -1046,6 +1079,7 @@
         </div>
       </div>
     </footer>
+    
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -1110,7 +1144,6 @@
 
       animate();
     </script>
-
 
 
     <script>
